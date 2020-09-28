@@ -7,9 +7,9 @@ import random
 import string
 import pathlib
 import datetime
+import pyperclip
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.Qt import QClipboard
 
 class Variables():
     def __init__(self):
@@ -208,9 +208,12 @@ class passgenUI(object):
         font.setPointSize(12)
         self.passwordBox.setFont(font)
         self.passwordBox.setObjectName("passwordBox")
+        self.passwordBox.textChanged.connect(self.checkCopyButtonAvailability)
         self.copyButton = QtWidgets.QPushButton(passwordUI)
         self.copyButton.setGeometry(QtCore.QRect(420, 130, 91, 31))
         self.copyButton.setObjectName("copyButton")
+        self.copyButton.clicked.connect(self.copyToClipBoard)
+        self.copyButton.setEnabled(False)
         self.horizontalLayoutWidget = QtWidgets.QWidget(passwordUI)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(40, 128, 371, 31))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -333,6 +336,26 @@ class passgenUI(object):
         else:
             variables.safemode = 'no'
         print('Safemode:',variables.safemode)
+
+    def checkCopyButtonAvailability(self):
+        if self.passwordBox.text in (None, ''):
+            self.copyButton.setEnabled(False)
+        else:
+            self.copyButton.setEnabled(True)
+
+    def copyToClipBoard(self):
+        pyperclip.copy(variables.final_password)
+        clipped = pyperclip.paste()
+        print(clipped)
+        copyBox = QMessageBox()
+        copyBox.setIcon(QMessageBox.Information)
+        copyBox.setText("Copied successfully!")
+        copyBox.setWindowTitle("Info")
+        copyBox.setStandardButtons(QMessageBox.Ok)
+
+        returnValue = copyBox.exec()
+        if returnValue == QMessageBox.Ok:
+            print('Closed')
 
     def printTries(self, _try):
         if _try == 0:
