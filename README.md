@@ -7,5 +7,8 @@ I will update this project more often than the command line based one, but the c
 I'm still new to github so please don't be angry, if i do something wrong here ^^
 I'm available for any questions or issues :)
 
+# BEFORE DOWNLOADING
+Please go to the releases, because the Help.py needs a JPG file which is inside a bin folder. If you can live wothout that JPG or wanna figure everything out byy yourself, then you're able to download the zip right away ^^
+If not, then please head to the releases and choose the package of your liking :)
 
 See you and have fun with my project :D
