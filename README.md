@@ -1,4 +1,4 @@
-# Passgen.py by itsthooor
+# Passgen Project by itsthooor
 Hey and welcome to my GUI version of the password generator (https://github.com/itsthooor/Password-Generator).
 To this version i added a great ui, a new algorythm, a help as well as about page.
 Some features (like a set of own chosen characters) are still in planning / developement.
