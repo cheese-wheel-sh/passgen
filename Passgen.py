@@ -13,13 +13,12 @@ from PyQt5.QtWidgets import QMessageBox
 
 class Variables():
     def __init__(self):
-        self.safemodeWasChecked = False
         self.generateLabelText = 'Generated in: '
         self.triesLabelText = 'Tries needed: '
         self._try = 1
         self.length = 8
         self.passMode = 'normal'
-        self.safemode = 'no'
+        self.safemode = False
         self.punctuation = string.punctuation
         self.final_password = 0
         self.weak = string.ascii_letters
@@ -297,7 +296,7 @@ class passgenUI(object):
         returnValue = msgBox.exec()
         if returnValue == QMessageBox.Ok:
             print('OK clicked')
-    
+
     def showHelp(self):
         app = QtWidgets.QApplication(sys.argv)
         help = QtWidgets.QWidget()
@@ -311,20 +310,14 @@ class passgenUI(object):
     def modeCheck(self):
         if self.weakRadioButton.isChecked():
             variables.passMode = 'weak'
-            print(variables.passMode)
-            variables.safemodeWasChecked = self.safemodeCheckBox.checkState()
             self.safemodeCheckBox.setChecked(False)
             self.safemodeCheckBox.setEnabled(False)
         elif self.normalRadioButton.isChecked():
             variables.passMode = 'normal'
-            print(variables.passMode)
             self.safemodeCheckBox.setEnabled(True)
-            self.safemodeCheckBox.setChecked(variables.safemodeWasChecked)
         elif self.strongRadioButton.isChecked():
             variables.passMode = 'strong'
-            print(variables.passMode)
             self.safemodeCheckBox.setEnabled(True)
-            self.safemodeCheckBox.setChecked(variables.safemodeWasChecked)
 
     def checkLength(self):
         variables.length = self.passLengthBox.value()
@@ -332,9 +325,9 @@ class passgenUI(object):
 
     def checkSafemode(self):
         if self.safemodeCheckBox.isChecked():
-            variables.safemode = 'yes'
+            variables.safemode = True
         else:
-            variables.safemode = 'no'
+            variables.safemode = False
         print('Safemode:',variables.safemode)
 
     def checkCopyButtonAvailability(self):
@@ -380,7 +373,7 @@ def tries(silent=False):
 
 def timer_st():
     timer1.timer_start = time.perf_counter()
- 
+
 def timer_stop():
     timer_gen_end = time.perf_counter()
     timer_gen_eq = timer_gen_end - timer1.timer_start
@@ -398,14 +391,16 @@ def charsSelected(mode):
 
 
 def generate():
+    variables._try = 1
     ui.printTries(0)
     mode = variables.passMode
     chars = charsSelected(mode)
     length = variables.length
     safemode = variables.safemode
     timer_st()
-    if safemode == 'yes':
+    if safemode == True:
         print('Safemode activated!')
+        print(mode)
         password = ''.join(random.choice(chars) for x in range(length))
         if mode == 'normal':
             intgen = re.findall(r'\d+', str(password))
@@ -413,14 +408,27 @@ def generate():
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 intgen = re.findall(r'\d+', str(password))
-        elif mode == 'strong':
+        if mode == 'strong':
+            print('Mode working')
             lettergenerator = re.findall("[A-Z]+", str(password))
             intgen = re.findall(r'\d+', str(password))
-            while len(lettergenerator) < (length / 3):
+            while len(lettergenerator) < (length / 5):
+                print(1)
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 lettergenerator = re.findall("[A-Z]+", str(password))
-            while len(intgen) < (length / 3):
+            while len(lettergenerator) > (length / 4):
+                print(2)
+                tries()
+                password = ''.join(random.choice(chars) for x in range(length))
+                lettergenerator = re.findall("[A-Z]+", str(password))
+            while len(intgen) < (length / 5):
+                print(3)
+                tries()
+                password = ''.join(random.choice(chars) for x in range(length))
+                intgen = re.findall(r'\d+', str(password))
+            while len(intgen) > (length / 4):
+                print(4)
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 intgen = re.findall(r'\d+', str(password))
