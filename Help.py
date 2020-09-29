@@ -1,6 +1,7 @@
 import pathlib
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+#Version 0.3
 
 class helpUI(object):
     def __init__(self):
