@@ -294,10 +294,7 @@ class passgenUI(object):
         msgBox.setText("Programmed by github.com/itsthooor\nProject Github -> https://github.com/itsthooor/passgen\nProject Passgen is licensed under GNU General Public License v2.0")
         msgBox.setWindowTitle("About Passgen.py")
         msgBox.setStandardButtons(QMessageBox.Ok)
-
         returnValue = msgBox.exec()
-        if returnValue == QMessageBox.Ok:
-            print('OK clicked')
 
     def showHelp(self):
         app = QtWidgets.QApplication(sys.argv)
@@ -323,14 +320,12 @@ class passgenUI(object):
 
     def checkLength(self):
         variables.length = self.passLengthBox.value()
-        print(variables.length)
 
     def checkSafemode(self):
         if self.safemodeCheckBox.isChecked():
             variables.safemode = True
         else:
             variables.safemode = False
-        print('Safemode:',variables.safemode)
 
     def checkCopyButtonAvailability(self):
         if self.passwordBox.text in (None, ''):
@@ -347,10 +342,7 @@ class passgenUI(object):
         copyBox.setText("Copied successfully!")
         copyBox.setWindowTitle("Info")
         copyBox.setStandardButtons(QMessageBox.Ok)
-
         returnValue = copyBox.exec()
-        if returnValue == QMessageBox.Ok:
-            print('Closed')
 
     def printTries(self, _try):
         if _try == 0:
@@ -402,7 +394,6 @@ def generate():
     timer_st()
     if safemode == True:
         print('Safemode activated!')
-        print(mode)
         password = ''.join(random.choice(chars) for x in range(length))
         if mode == 'normal':
             intgen = re.findall(r'\d+', str(password))
@@ -415,22 +406,18 @@ def generate():
             lettergenerator = re.findall("[A-Z]+", str(password))
             intgen = re.findall(r'\d+', str(password))
             while len(lettergenerator) < (length / 5):
-                print(1)
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 lettergenerator = re.findall("[A-Z]+", str(password))
             while len(lettergenerator) > (length / 4):
-                print(2)
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 lettergenerator = re.findall("[A-Z]+", str(password))
             while len(intgen) < (length / 5):
-                print(3)
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 intgen = re.findall(r'\d+', str(password))
             while len(intgen) > (length / 4):
-                print(4)
                 tries()
                 password = ''.join(random.choice(chars) for x in range(length))
                 intgen = re.findall(r'\d+', str(password))
