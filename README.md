@@ -18,6 +18,8 @@ I testest the algorythm many times and it will be updated often to ensure securi
 I use http://www.passwordmeter.com/ for password score and let my Passgen compete against https://passwordsgenerator.net/ and https://duckduckgo.com.
 Passgen got always the best result at 50 or less for now (i tested 100, 50 and 30).
 passwordsgenerator had 50-100 more points on a length of 100, but this will be changed in future updates ;)
+Update: Algorythm is  now more in testing than before, but works better than before.
+But you don't have to use it, if you don't want to. It seems still to be better than other generators.
 
 # BEFORE DOWNLOADING
 Please go to the releases, because the Help.py needs a JPG file which is inside a bin folder. If you can live without that JPG or wanna figure everything out byy yourself, then you're able to download the zip right away ^^
