@@ -21,10 +21,6 @@ passwordsgenerator had 50-100 more points on a length of 100, but this will be c
 Update: Algorythm is  now more in testing than before, but works better than before.
 But you don't have to use it, if you don't want to. It seems still to be better than other generators.
 
-# BEFORE DOWNLOADING
-Please go to the releases, because the Help.py needs a JPG file which is inside a bin folder. If you can live without that JPG or wanna figure everything out byy yourself, then you're able to download the zip right away ^^
-If not, then please head to the releases and choose the package of your liking :)
-
 I want to talk about this as openly as i can, to ensure you know everything before trying it out ^^
 If you have anny suggestions please feel free to contact me :)
 See you and have fun with my project :D
