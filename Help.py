@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-#Version 0.3
+#Version 0.4
 
 class helpUI(object):
     def __init__(self):

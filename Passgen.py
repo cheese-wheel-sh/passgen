@@ -11,7 +11,7 @@ import pyperclip
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
-#Version 0.3
+#Version 0.4 - Security Update!
 
 class Variables():
     def __init__(self):
