@@ -3,9 +3,9 @@ import re
 import sys
 import time
 import Help as h
-import random
 import string
 import pathlib
+import secrets
 import datetime
 import pyperclip
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -387,6 +387,7 @@ def charsSelected(mode):
 def generate():
     variables._try = 1
     ui.printTries(0)
+    ui.passwordBox.setText("")
     mode = variables.passMode
     chars = charsSelected(mode)
     length = variables.length
@@ -394,36 +395,45 @@ def generate():
     timer_st()
     if safemode == True:
         print('Safemode activated!')
-        password = ''.join(random.choice(chars) for x in range(length))
+        password = ''.join(secrets.choice(chars) for x in range(length))
         if mode == 'normal':
-            intgen = re.findall(r'\d+', str(password))
-            while len(intgen) < (length / 2):
+            intgenerator = re.findall(r'\d+', str(password))
+            while len(intgenerator) < (length / 2):
                 tries()
-                password = ''.join(random.choice(chars) for x in range(length))
-                intgen = re.findall(r'\d+', str(password))
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                intgenerator = re.findall(r'\d+', str(password))
         if mode == 'strong':
             print('Mode working')
-            lettergenerator = re.findall("[A-Z]+", str(password))
-            intgen = re.findall(r'\d+', str(password))
-            while len(lettergenerator) < (length / 5):
+            biglettergenerator = re.findall("[A-Z]+", str(password))
+            smalllettergenerator = re.findall("[a-z]+", str(password))
+            intgenerator = re.findall(r'\d+', str(password))
+            while len(biglettergenerator) < (length / 5):
                 tries()
-                password = ''.join(random.choice(chars) for x in range(length))
-                lettergenerator = re.findall("[A-Z]+", str(password))
-            while len(lettergenerator) > (length / 4):
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                biglettergenerator = re.findall("[A-Z]+", str(password))
+            while len(biglettergenerator) > (length / 4):
                 tries()
-                password = ''.join(random.choice(chars) for x in range(length))
-                lettergenerator = re.findall("[A-Z]+", str(password))
-            while len(intgen) < (length / 5):
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                biglettergenerator = re.findall("[A-Z]+", str(password))
+            while len(smalllettergenerator) < (length / 5):
                 tries()
-                password = ''.join(random.choice(chars) for x in range(length))
-                intgen = re.findall(r'\d+', str(password))
-            while len(intgen) > (length / 4):
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                smalllettergenerator = re.findall("[a-z]+", str(password))
+            while len(smalllettergenerator) > (length / 4):
                 tries()
-                password = ''.join(random.choice(chars) for x in range(length))
-                intgen = re.findall(r'\d+', str(password))
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                smalllettergenerator = re.findall("[a-z]+", str(password))
+            while len(intgenerator) < (length / 5):
+                tries()
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                intgenerator = re.findall(r'\d+', str(password))
+            while len(intgenerator) > (length / 4):
+                tries()
+                password = ''.join(secrets.choice(chars) for x in range(length))
+                intgenerator = re.findall(r'\d+', str(password))
         variables.final_password = password
     else:
-        password = ''.join(random.choice(chars) for x in range(length))
+        password = ''.join(secrets.choice(chars) for x in range(length))
         variables.final_password = password
         ui.printTries(1)
     timer_stop()
