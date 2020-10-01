@@ -336,7 +336,6 @@ class passgenUI(object):
     def copyToClipBoard(self):
         pyperclip.copy(variables.final_password)
         clipped = pyperclip.paste()
-        print(clipped)
         copyBox = QMessageBox()
         copyBox.setIcon(QMessageBox.Information)
         copyBox.setText("Copied successfully!")
@@ -362,7 +361,6 @@ timer1 = Timers()
 def tries(silent=False):
     variables._try += 1
     if not silent:
-        print('Try nr.:',variables._try)
         ui.printTries(variables._try)
 
 def timer_st():
@@ -394,7 +392,6 @@ def generate():
     safemode = variables.safemode
     timer_st()
     if safemode == True:
-        print('Safemode activated!')
         password = ''.join(secrets.choice(chars) for x in range(length))
         if mode == 'normal':
             intgenerator = re.findall(r'\d+', str(password))
@@ -403,7 +400,6 @@ def generate():
                 password = ''.join(secrets.choice(chars) for x in range(length))
                 intgenerator = re.findall(r'\d+', str(password))
         if mode == 'strong':
-            print('Mode working')
             biglettergenerator = re.findall("[A-Z]+", str(password))
             smalllettergenerator = re.findall("[a-z]+", str(password))
             intgenerator = re.findall(r'\d+', str(password))
@@ -438,7 +434,6 @@ def generate():
         ui.printTries(1)
     timer_stop()
     variables._try = 1
-    #print(variables.final_password)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
