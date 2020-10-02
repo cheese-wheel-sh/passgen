@@ -2,16 +2,16 @@ import os
 import re
 import sys
 import time
-import Help as h
 import string
 import pathlib
 import secrets
 import datetime
 import pyperclip
+from Help import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
-#Version 0.4 - Security Update!
+#Version 0.5 - Bug fix with Help.py
 
 class Variables():
     def __init__(self):
@@ -34,6 +34,12 @@ class Timers():
         self.timer_time = None
 
 class passgenUI(object):
+    def ok(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = helpUI()
+        self.ui.setupHelp(self.window)
+        self.window.show()
+
     def setupUi(self, passwordUI):
         passwordUI.setObjectName("passwordUI")
         passwordUI.resize(551, 253)
@@ -268,7 +274,7 @@ class passgenUI(object):
         self.helpButton = QtWidgets.QPushButton(passwordUI)
         self.helpButton.setGeometry(QtCore.QRect(408, 220, 61, 25))
         self.helpButton.setObjectName("helpButton")
-        self.helpButton.clicked.connect(self.showHelp)
+        self.helpButton.clicked.connect(self.ok)
 
         self.retranslateUi(passwordUI)
         QtCore.QMetaObject.connectSlotsByName(passwordUI)
@@ -295,16 +301,6 @@ class passgenUI(object):
         msgBox.setWindowTitle("About Passgen.py")
         msgBox.setStandardButtons(QMessageBox.Ok)
         returnValue = msgBox.exec()
-
-    def showHelp(self):
-        app = QtWidgets.QApplication(sys.argv)
-        help = QtWidgets.QWidget()
-        ui = h.helpUI()
-        ui.getImagePath = str(pathlib.Path(__file__).parent.absolute()) + '/bin/Help.jpg'
-        ui.setupUi(help)
-        help.show()
-        help.showUI()
-        sys.exit(app.exec_())
 
     def modeCheck(self):
         if self.weakRadioButton.isChecked():
@@ -354,14 +350,14 @@ class passgenUI(object):
         self.timeLabel.setText(variables.generateLabelText+timer1.timer_time)
         self.passwordBox.setText(variables.final_password)
 
-ui = passgenUI()
+passUI = passgenUI()
 variables = Variables()
 timer1 = Timers()
 
 def tries(silent=False):
     variables._try += 1
     if not silent:
-        ui.printTries(variables._try)
+        passUI.printTries(variables._try)
 
 def timer_st():
     timer1.timer_start = time.perf_counter()
@@ -384,8 +380,8 @@ def charsSelected(mode):
 
 def generate():
     variables._try = 1
-    ui.printTries(0)
-    ui.passwordBox.setText("")
+    passUI.printTries(0)
+    passUI.passwordBox.setText("")
     mode = variables.passMode
     chars = charsSelected(mode)
     length = variables.length
@@ -431,14 +427,14 @@ def generate():
     else:
         password = ''.join(secrets.choice(chars) for x in range(length))
         variables.final_password = password
-        ui.printTries(1)
+        passUI.printTries(1)
     timer_stop()
     variables._try = 1
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     passwordUI = QtWidgets.QWidget()
-    ui = passgenUI()
-    ui.setupUi(passwordUI)
+    passUI = passgenUI()
+    passUI.setupUi(passwordUI)
     passwordUI.show()
     sys.exit(app.exec_())
