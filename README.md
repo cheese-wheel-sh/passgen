@@ -13,7 +13,7 @@ I'm available for any questions or issues :)
 There is a mess up on my side at version 0.3 and less.
 I used random() to create the passwords, but this isn't secure at all and so i got recommended to use secrets() instead, because it's also made for password generation. Version 0.4 and hiher have these implemented and so please upgrade as soon as possible!
 
-# Why Passgen and not any other program / website
+# Why Passgen?
 Simple: It's all about the safemode algorythm implemented inside Passgen.
 It tries to make passwords more secure and it does a great job at it (see https://github.com/itsthooor/passgen#recommended-password-length-with-passgen).
 It will also see many updates to make it more and more secure.
