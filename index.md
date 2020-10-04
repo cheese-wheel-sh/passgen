@@ -12,6 +12,6 @@ Simple: It's all about the safemode algorythm implemented inside Passgen. It tri
 ### Features
 It comes with simple Features like password length, copy-to-clipboard button, password strength, a simple help documentation, a short about message, generation stats and the best thing: the [safemode algorithm](https://itsthooor.github.io/passgen#safemode-algorithm).
 
-### Safemode Algorith
+### Safemode Algorithm
 The best thing about Passgen. It scans every generated Password many times, until it has the Passgen Security Standard.
 I created it on my own and i'll change it from time to time to make it very good.
